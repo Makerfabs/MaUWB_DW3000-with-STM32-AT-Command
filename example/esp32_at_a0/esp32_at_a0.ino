@@ -107,7 +107,7 @@ void logoshow(void)
 
     display.setTextSize(2);
     display.setCursor(0, 40); // Start at top-left corner
-    display.println(F("T0"));
+    display.println(F("A0"));
     display.display();
     delay(2000);
 }
