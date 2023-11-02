@@ -192,3 +192,37 @@ Connect the PC with a USB cable and run the Python program.
 
 **This code is for promotional use only and is not part of the UWB AT module product, and Makerfabs does not provide further technical support.**
 
+
+# AT Module Firmware Update
+
+Connect ST-Link to PC.
+
+Open STM32 ST-LINK Utility.
+![](md_pic/u1.jpg)
+
+Open "Target/Settings", it should display ST-Link Serial Number.
+![](md_pic/u2.jpg)
+
+Close the window, back to main page.
+
+Connect ST-Link and MaUWB.
+
+And use TypeC cable power on MaUWB, the power of ST-Link is not enough.
+
+Like this:
+
+|ST-LINK|3v3|gnd|clk|dio|
+|----|----|----|----|----|
+|UWB_AT|3.3v|gnd|swclk|swdio|
+
+![](md_pic/u3.jpg)
+
+Click "connect to target", it should be display device type. And click "Program verify".
+
+![](md_pic/u4.jpg)
+
+Select hex file, click "START" to download.
+
+![](md_pic/u5.jpg)
+
+![](md_pic/u6.jpg)
