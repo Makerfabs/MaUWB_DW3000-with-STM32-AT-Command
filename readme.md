@@ -3,9 +3,9 @@
 
 ```c++
 /*
-Version:		V1.1
-Author:			Vincent
-Create Date:	2023/10/14
+Version:||V1.1
+Author:|||Vincent
+Create Date:|2023/10/14
 Note:
 
     2023/10/19 V1.1: Add at command usage and hardware.
@@ -226,3 +226,24 @@ Select hex file, click "START" to download.
 ![](md_pic/u5.jpg)
 
 ![](md_pic/u6.jpg)
+
+
+# STM32 Pin Map
+
+STM32F103RCT6
+
+|Index|STM32|PINOUT|Function|
+|----|----|----|----|
+|1|PA0|DW_RSTn|Reset pin. Active Low Output.|
+|2|PA4|DW_CSn|SPI chip select|
+|3|PA5|DW_SLK|SPI clock|
+|4|PA6|DW_MISO|SPI data output|
+|5|PA7|DW_MOSI|SPI data input.|
+|6|PA8|DW_EXTON|External device enable. Asserted during wake up process and held active until device enters sleep mode. Can be used to control external DC-DC converters or other circuits that are not required when the device is in sleep mode so as to minimize power consumption.|
+|7|PB0|DW_wakeup|When asserted into its active high state, the WAKEUP pin brings the DW3000 out of SLEEP or DEEPSLEEP states into operational mode|
+|8|PB5|DW_IRQn|Interrupt Request output from the DW3000 to the host processor. By default IRQ is an active-high output but may be configured to be active low if required. For correct operation in SLEEP and DEEPSLEEP modes it should be configured for active high operation. This pin will float in SLEEP and DEEPSLEEP states and may cause spurious interrupts unless pulled low. When the IRQ functionality is not being used the pin may be reconfigured as a general purpose I/O line, GPIO8.|
+|10|PA1|LED_RUN|Indicator output pin|
+|11|PA9|USART1_TX|
+|12|PA10|USART1_RX|
+|13|PA13|SWDIO|
+|14|PA14|SWCLK|

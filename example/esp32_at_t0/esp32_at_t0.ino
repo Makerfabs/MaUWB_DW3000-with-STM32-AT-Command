@@ -15,6 +15,24 @@ Use 2.5.7   Adafruit_SSD1306
 #include <Adafruit_SSD1306.h>
 #include <Arduino.h>
 
+#define TAG
+// #define ANCHOR
+
+#define UWB_INDEX 0
+
+#ifdef TAG
+
+#define ROLE_TXT "T" + UWB_INDEX
+#define ROLE_SET "AT+SETCFG=" + UWB_INDEX + ",0,0,1"
+
+#endif
+#ifdef ANCHOR
+
+#define ROLE_TXT "A" + UWB_INDEX
+#define ROLE_SET "AT+SETCFG=" + UWB_INDEX + ",1,0,1"
+
+#endif
+
 #define SERIAL_LOG Serial
 #define SERIAL_AT mySerial2
 
@@ -56,7 +74,10 @@ void setup()
 
     sendData("AT?", 2000, 1);
     sendData("AT+RESTORE", 5000, 1);
-    sendData("AT+SETCFG=0,0,0,1", 2000, 1);
+
+    String temp = "";
+    temp = temp + ROLE_SET;
+    sendData(temp, 2000, 1);
     sendData("AT+SETCAP=10,15", 2000, 1);
     sendData("AT+SETRPT=1", 2000, 1);
     sendData("AT+SAVE", 2000, 1);
@@ -109,7 +130,10 @@ void logoshow(void)
 
     display.setTextSize(2);
     display.setCursor(0, 40); // Start at top-left corner
-    display.println(F("T0"));
+
+    String temp = "";
+    temp = temp + ROLE_TXT;
+    display.println(temp);
     display.display();
     delay(2000);
 }
