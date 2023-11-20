@@ -55,7 +55,7 @@ void setup()
     sendData("AT?", 2000, 1);
     sendData("AT+RESTORE", 5000, 1);
     sendData("AT+SETCFG=0,1,0,1", 2000, 1);
-    sendData("AT+SETCAP=10,15", 2000, 1);
+    sendData("AT+SETCAP=32,15", 2000, 1);
     sendData("AT+SETRPT=1", 2000, 1);
     sendData("AT+SAVE", 2000, 1);
     sendData("AT+RESTART", 2000, 1);

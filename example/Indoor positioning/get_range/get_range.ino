@@ -100,10 +100,12 @@ void logoshow(void)
     display.setTextSize(2);              // Normal 1:1 pixel scale
     display.setTextColor(SSD1306_WHITE); // Draw white text
     display.setCursor(0, 0);             // Start at top-left corner
-    display.println(F("Makerfabs"));
+    display.println(F("Get Range"));
 
     // display.setTextSize(1);
-    display.setCursor(0, 20); // Start at top-left corner
+    display.setCursor(0, 20);
+    display.println(F("JSON"));
+    display.setCursor(0, 40);
     display.println(F("A0"));
     display.display();
     delay(2000);

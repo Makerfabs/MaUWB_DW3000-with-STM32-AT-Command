@@ -10,28 +10,24 @@ Use 2.5.7   Adafruit_SSD1306
 
 */
 
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#include <Arduino.h>
+// User config          ------------------------------------------
+
+#define UWB_INDEX 0
 
 #define TAG
 // #define ANCHOR
 
-#define UWB_INDEX 0
+#define FREQ_850K
+// #define FREQ_6800K
 
-#ifdef TAG
+#define UWB_TAG_COUNT 32
 
-#define ROLE_TXT "T" + UWB_INDEX
-#define ROLE_SET "AT+SETCFG=" + UWB_INDEX + ",0,0,1"
+// User config end       ------------------------------------------
 
-#endif
-#ifdef ANCHOR
-
-#define ROLE_TXT "A" + UWB_INDEX
-#define ROLE_SET "AT+SETCFG=" + UWB_INDEX + ",1,0,1"
-
-#endif
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Arduino.h>
 
 #define SERIAL_LOG Serial
 #define SERIAL_AT mySerial2
@@ -75,10 +71,9 @@ void setup()
     sendData("AT?", 2000, 1);
     sendData("AT+RESTORE", 5000, 1);
 
-    String temp = "";
-    temp = temp + ROLE_SET;
-    sendData(temp, 2000, 1);
-    sendData("AT+SETCAP=10,15", 2000, 1);
+    sendData(config_cmd(), 2000, 1);
+    sendData(cap_cmd(), 2000, 1);
+
     sendData("AT+SETRPT=1", 2000, 1);
     sendData("AT+SAVE", 2000, 1);
     sendData("AT+RESTART", 2000, 1);
@@ -125,16 +120,36 @@ void logoshow(void)
     display.setTextColor(SSD1306_WHITE); // Draw white text
     display.setCursor(0, 0);             // Start at top-left corner
     display.println(F("MaUWB DW3000"));
+
     display.setCursor(0, 20); // Start at top-left corner
-    display.println(F("with STM32 AT Command"));
+    // display.println(F("with STM32 AT Command"));
 
     display.setTextSize(2);
-    display.setCursor(0, 40); // Start at top-left corner
 
     String temp = "";
-    temp = temp + ROLE_TXT;
+
+#ifdef TAG
+    temp = temp + "T" + UWB_INDEX;
+#endif
+#ifdef ANCHOR
+    temp = temp + "A" + UWB_INDEX;
+#endif
+#ifdef FREQ_850K
+    temp = temp + "   850k";
+#endif
+#ifdef FREQ_6800K
+    temp = temp + "   6.8M";
+#endif
     display.println(temp);
+
+    display.setCursor(0, 40);
+
+    temp = "Total: ";
+    temp = temp + UWB_TAG_COUNT;
+    display.println(temp);
+
     display.display();
+
     delay(2000);
 }
 
@@ -165,4 +180,51 @@ String sendData(String command, const int timeout, boolean debug)
     }
 
     return response;
+}
+
+String config_cmd()
+{
+    String temp = "AT+SETCFG=";
+
+    // Set device id
+    temp = temp + UWB_INDEX;
+
+    // Set device role
+#ifdef TAG
+    temp = temp + ",0";
+#endif
+#ifdef ANCHOR
+    temp = temp + ",1";
+#endif
+
+    // Set frequence 850k or 6.8M
+#ifdef FREQ_850K
+    temp = temp + ",0";
+#endif
+#ifdef FREQ_6800K
+    temp = temp + ",1";
+#endif
+
+    // Set range filter
+    temp = temp + ",1";
+
+    return temp;
+}
+
+String cap_cmd()
+{
+    String temp = "AT+SETCAP=";
+
+    // Set Tag capacity
+    temp = temp + UWB_TAG_COUNT;
+
+    //  Time of a single time slot
+#ifdef FREQ_850K
+    temp = temp + ",15";
+#endif
+#ifdef FREQ_6800K
+    temp = temp + ",10";
+#endif
+
+    return temp;
 }
