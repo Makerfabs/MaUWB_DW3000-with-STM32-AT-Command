@@ -1,16 +1,17 @@
 # MaUWB_DW3000 with STM32 AT Command
 
 
-```c++
-/*
-Version:||V1.1
-Author:|||Vincent
-Create Date:|2023/10/14
+```
+
+Version:    V1.2
+Author:     Vincent
+Create Date:    2023/10/14
 Note:
 
     2023/10/19 V1.1: Add at command usage and hardware.
+    2023/12/11 V1.2: Add a packaged position.py.
 
-*/
+
 ```
 ![](md_pic/main.jpg)
 
@@ -191,6 +192,16 @@ A3X, A3Y = 0, 700
 Connect the PC with a USB cable and run the Python program.
 
 **This code is for promotional use only and is not part of the UWB AT module product, and Makerfabs does not provide further technical support.**
+
+**Update**
+
+For a more convenient experience for some customers, we provide a packaged exe file. Please insert A0 configured first, and be sure to burn the get_range program.
+
+And make sure the computer's serial port is not connected to any other devices, because this program is scanning the first COM device.
+
+And this program has been determined to be in the range of 10 meters by 10 meters, and will be accompanied by various crashes.
+
+We are not responsible for any technical support for this software, for reference only, only for the packaging of position.py.
 
 
 # AT Module Firmware Update

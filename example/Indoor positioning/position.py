@@ -7,6 +7,11 @@ import os
 import time
 import math
 
+
+# import site  
+# print(site.getsitepackages())
+
+
 RED = [255, 0, 0]
 BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
@@ -118,11 +123,11 @@ def draw_uwb(uwb):
     pixel_y = SCREEN_Y - int(uwb.y * cm2p + y_offset)
 
     if uwb.status:
-        r = 15
+        r = 10
 
         temp_str = uwb.name + " (" + str(uwb.x) + "," + str(uwb.y)+")"
 
-        font = pygame.font.SysFont("Consola", 32)
+        font = pygame.font.SysFont("Consola", 24)
         surf = font.render(temp_str, True, uwb.color)
         screen.blit(surf, [pixel_x, pixel_y])
 
@@ -192,10 +197,10 @@ tag_count = 8
 # A2X, A2Y = 427, 1726
 # A3X, A3Y = 458, 112
 
-A0X, A0Y = 300, 200
-A1X, A1Y = 300, 300
-A2X, A2Y = 0, 0
-A3X, A3Y = 0, 700
+A0X, A0Y = 0, 0
+A1X, A1Y = 1000, 0
+A2X, A2Y = 1000, 1000
+A3X, A3Y = 0, 1000
 
 CENTER_X = int((A0X+A1X+A2X)/3)
 CENTER_Y = int((A0Y+A1Y+A2Y)/3)
@@ -207,7 +212,7 @@ r3 = distance(A3X, A3Y, CENTER_X, CENTER_Y)
 
 r = max(r0, r1, r2, r3)
 
-cm2p = SCREEN_X / 2 * 0.8 / r
+cm2p = SCREEN_X / 2 * 0.9 / r
 
 # meter to pixel
 # 1000 cm =  1000 piexl
@@ -245,3 +250,8 @@ while True:
         fresh_page()
         runtime = time.time()
         ser.reset_input_buffer()
+
+
+
+# Package Command
+# pyinstaller --onefile .\position.py
