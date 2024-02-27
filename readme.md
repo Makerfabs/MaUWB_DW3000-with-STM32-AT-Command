@@ -40,7 +40,7 @@ The latest UWB module that solves multiple anchors& tags mutual conflicts, suppo
 
 - DW3000 with PA, max range 500M
 - Precision 0.5M(in range 100m)
-- Support 8 anchors+ 32 Tags application
+- Support 8 anchors+ 64 Tags application
 
 # Code
 
