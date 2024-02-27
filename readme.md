@@ -33,14 +33,14 @@ Product Link ：[MaUWB_DW3000 with STM32 AT Command](https://www.makerfabs.com/m
 
 Wiki Link : []()
 
-The latest UWB module that solves multiple anchors& tags mutual conflicts, support max 8 Anchors + 32 tags in application, to create a multi-anchor multi-tag positioning system.
+The latest UWB module that solves multiple anchors& tags mutual conflicts, support max 8 Anchors + 64 tags in application, to create a multi-anchor multi-tag positioning system, and add the ability to set the Anchor antenna delay
 
 
 ## Feature
 
 - DW3000 with PA, max range 500M
 - Precision 0.5M(in range 100m)
-- Support 8 anchors+ 32 Tags application
+- Support 8 anchors+ 64 Tags application
 
 # Code
 
