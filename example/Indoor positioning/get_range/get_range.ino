@@ -2,6 +2,10 @@
 For ESP32 UWB AT Demo
 */
 
+// define the esp version of your device:
+// #define ESP32S3
+#define ESP32
+
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -9,6 +13,7 @@ For ESP32 UWB AT Demo
 
 HardwareSerial mySerial2(2);
 
+#ifdef ESP32
 #define RESET 32
 
 #define IO_RXD2 18
@@ -16,6 +21,19 @@ HardwareSerial mySerial2(2);
 
 #define I2C_SDA 4
 #define I2C_SCL 5
+
+#endif
+
+#ifdef ESP32S3
+#define RESET 16
+
+#define IO_RXD2 18
+#define IO_TXD2 17
+
+#define I2C_SDA 39
+#define I2C_SCL 38
+
+#endif
 
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
