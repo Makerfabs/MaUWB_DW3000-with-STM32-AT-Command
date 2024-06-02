@@ -8,6 +8,11 @@ Use 2.0.0   SPI
 Use 2.5.7   Adafruit_SSD1306
 */
 
+
+// define the esp version of your device:
+// #define ESP32S3
+#define ESP32
+
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -18,6 +23,7 @@ Use 2.5.7   Adafruit_SSD1306
 
 HardwareSerial SERIAL_AT(2);
 
+#ifdef ESP32
 #define RESET 32
 
 #define IO_RXD2 18
@@ -25,6 +31,19 @@ HardwareSerial SERIAL_AT(2);
 
 #define I2C_SDA 4
 #define I2C_SCL 5
+
+#endif
+
+#ifdef ESP32S3
+#define RESET 16
+
+#define IO_RXD2 18
+#define IO_TXD2 17
+
+#define I2C_SDA 39
+#define I2C_SCL 38
+
+#endif
 
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
