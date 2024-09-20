@@ -1,5 +1,5 @@
 /*
-Data Transform Demo
+Data transmit Demo
 UWB Module Firmware later than 1.1.0 is required
 
 Use 2.0.0   Wire
@@ -14,8 +14,8 @@ Use 2.5.7   Adafruit_SSD1306
 
 #define UWB_INDEX 0
 
-// #define TAG
-#define ANCHOR
+#define TAG
+// #define ANCHOR
 
 #define FREQ_850K
 // #define FREQ_6800K
@@ -86,10 +86,10 @@ String response = "";
 
 void loop()
 {
-    if ((millis() - runtime) > 1000)
+    if ((millis() - runtime) > 500)
     {
         char data_str[80];
-        sprintf(data_str, "AT+DATA=32,UWB_A0_Data:%d", data_count * 2 + 1);
+        sprintf(data_str, "AT+DATA=32,UWB_T0_Data:%d", data_count * 2);
         data_count++;
         sendData(data_str, 2000, 1);
         runtime = millis();
@@ -231,7 +231,7 @@ String cap_cmd()
     temp = temp + ",25,1";
 #endif
 #ifdef FREQ_6800K
-    temp = temp + ",15,1";
+    temp = temp + ",10";
 #endif
 
     return temp;
