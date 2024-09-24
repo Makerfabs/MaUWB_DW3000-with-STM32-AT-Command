@@ -3,13 +3,14 @@
 
 ```
 
-Version:    V1.2
+Version:    V1.3
 Author:     Vincent
 Create Date:    2023/10/14
 Note:
 
     2023/10/19 V1.1: Add at command usage and hardware.
     2023/12/11 V1.2: Add a packaged position.py.
+    2024/9/24  V1.3: MaUWB(v1.1.1).HEX is released to support simultaneous data transmission for ranging.
 
 
 ```
@@ -41,6 +42,7 @@ The latest UWB module that solves multiple anchors& tags mutual conflicts, suppo
 - DW3000 with PA, max range 500M
 - Precision 0.5M(in range 100m)
 - Support 8 anchors+ 64 Tags application
+- Distance measurement and data transmission.
 
 # Code
 
@@ -141,8 +143,6 @@ AT+SETCFG=5,0,0,1
 
 
 ```
-
-
 
 ## Compiler Options
 
