@@ -75,7 +75,7 @@ AT+SETCFG=(x1),(x2),(x3),(x4)
 //Set the role and frequency
 //More on that later
 
-AT+SETCAP=10,15
+AT+SETCAP=10,15,0
 
 //Set the capacity and send time slot
 
@@ -144,6 +144,48 @@ AT+SETCFG=5,0,0,1
 
 ```
 
+### Set data transmit mode
+
+AT+SETCAP=(x1),(x2),(x3)
+
+x1:Tag capacity (default: 10, maximum: 64)
+
+x2:Time of a single time slot
+
+X3:extMode (0: normal packet when communicating, 1: extended packet when communicating)
+
+
+6.8M, Minimum single slot time 10ms for normal packet, Minimumsingle slot time 10ms for extended packet. 
+
+850K. Minimum single slot time 15ms for normal packet, Minimumsingle slot time 25ms for extended packet.
+
+```c
+// 850K
+AT+SETCAP=10,25,1
+
+// 6.8M
+AT+SETCAP=10,10,1
+
+
+```
+
+### Send data
+
+Must set data transmit mode first.
+
+AT+DATA=(x1),(x2)
+
+x1:Length of transmitted data
+
+x2:Transmitted data
+
+```c
+
+AT+DATA=32,HELLO_WORLD_123456
+
+```
+
+
 ## Compiler Options
 
 - Use type-c use cable connect USB-TTL to PC.
@@ -170,6 +212,10 @@ Reset the UWB AT module and set it to Anchor 0.
 ### serial_test
 
 Serial port test
+
+### data_transmit
+
+This command is used to test the newly added AT+DATA command, which can transmit data.
 
 ### Indoor positioning
 
