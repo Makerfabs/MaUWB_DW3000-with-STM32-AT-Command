@@ -3,13 +3,14 @@
 
 ```
 
-Version:    V1.2
+Version:    V1.3
 Author:     Vincent
 Create Date:    2023/10/14
 Note:
 
     2023/10/19 V1.1: Add at command usage and hardware.
     2023/12/11 V1.2: Add a packaged position.py.
+    2024/9/24  V1.3: MaUWB(v1.1.1).HEX is released to support simultaneous data transmission for ranging.
 
 
 ```
@@ -41,6 +42,7 @@ The latest UWB module that solves multiple anchors& tags mutual conflicts, suppo
 - DW3000 with PA, max range 500M
 - Precision 0.5M(in range 100m)
 - Support 8 anchors+ 64 Tags application
+- Distance measurement and data transmission.
 
 # Code
 
@@ -73,7 +75,7 @@ AT+SETCFG=(x1),(x2),(x3),(x4)
 //Set the role and frequency
 //More on that later
 
-AT+SETCAP=10,15
+AT+SETCAP=10,15,0
 
 //Set the capacity and send time slot
 
@@ -142,6 +144,46 @@ AT+SETCFG=5,0,0,1
 
 ```
 
+### Set data transmit mode
+
+AT+SETCAP=(x1),(x2),(x3)
+
+x1:Tag capacity (default: 10, maximum: 64)
+
+x2:Time of a single time slot
+
+X3:extMode (0: normal packet when communicating, 1: extended packet when communicating)
+
+
+6.8M, Minimum single slot time 10ms for normal packet, Minimumsingle slot time 10ms for extended packet. 
+
+850K. Minimum single slot time 15ms for normal packet, Minimumsingle slot time 25ms for extended packet.
+
+```c
+// 850K
+AT+SETCAP=10,25,1
+
+// 6.8M
+AT+SETCAP=10,10,1
+
+
+```
+
+### Send data
+
+Must set data transmit mode first.
+
+AT+DATA=(x1),(x2)
+
+x1:Length of transmitted data
+
+x2:Transmitted data
+
+```c
+
+AT+DATA=32,HELLO_WORLD_123456
+
+```
 
 
 ## Compiler Options
@@ -170,6 +212,10 @@ Reset the UWB AT module and set it to Anchor 0.
 ### serial_test
 
 Serial port test
+
+### data_transmit
+
+This command is used to test the newly added AT+DATA command, which can transmit data.
 
 ### Indoor positioning
 
